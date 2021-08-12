@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-
+//Elastic Service
 @Service
 public class ElasticsearchServiceImpl implements ElasticsearchService {
+
 
     @Override
     public JobAdvertisementDTO pushDataToElasticIndex(JobAdvertisementDTO jobAdvertisementDTO) {
@@ -25,7 +26,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
     public List<JobAdvertisementDTO> searchJobAdvByDate(String date) {
         RestTemplate restTemplate = new RestTemplate();
         String elasticUrl = "http://localhost:8081/api/elasticsearch/search-by-date?date=" + date;
-        ResponseEntity<List<JobAdvertisementDTO>> response = restTemplate.exchange(elasticUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<JobAdvertisementDTO>>() {
+        ResponseEntity<List<JobAdvertisementDTO>> response = restTemplate.exchange(elasticUrl, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
         });
         return response.getBody();
     }
@@ -34,7 +35,7 @@ public class ElasticsearchServiceImpl implements ElasticsearchService {
     public List<JobAdvertisementDTO> searchJobAdvByEmployerId(Long id) {
         RestTemplate restTemplate = new RestTemplate();
         String elasticUrl = "http://localhost:8081/api/elasticsearch/jobs-by-employer?employerId=" + id;
-        ResponseEntity<List<JobAdvertisementDTO>> response = restTemplate.exchange(elasticUrl, HttpMethod.GET, null, new ParameterizedTypeReference<List<JobAdvertisementDTO>>() {
+        ResponseEntity<List<JobAdvertisementDTO>> response = restTemplate.exchange(elasticUrl, HttpMethod.GET, null, new ParameterizedTypeReference<>() {
         });
         return response.getBody();
     }
